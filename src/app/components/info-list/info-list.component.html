@@ -1,0 +1,27 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Debit</th>
+      <th>Volume</th>
+      <th>PH</th>
+      <th>Type</th>
+      <th>Categorie</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let info of infos; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ info.debit }}</td>
+      <td>{{ info.volume }}</td>
+      <td>{{ info.ph }}</td>
+      <td>{{ info.type.typeName }}</td>
+      <td>{{ info.categorie }}</td>
+      <td>
+        <button class="btn btn-sm btn-primary" (click)="openEditDialog(info)">Edit</button>
+        <button class="btn btn-sm btn-danger" (click)="deleteInfo(info.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

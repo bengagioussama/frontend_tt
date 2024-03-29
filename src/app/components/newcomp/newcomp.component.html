@@ -1,0 +1,7 @@
+
+<h4>{{title}}</h4>
+<input [disabled]="isDisabled" #myIp [(ngModel)]="name">   <!-- property -->
+{{name}}
+<h2 [class.text-danger]="isDisabled">Class</h2>
+<h2 [ngClass]="test">Class</h2>
+<button (click)="onClick(myIp.value)">Event</button>

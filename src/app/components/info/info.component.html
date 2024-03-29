@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <h1>Formulaire pour ajouter info eaux usée</h1>
+  <form [formGroup]="infoForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="debit">Débit</label>
+      <input type="text" class="form-control" formControlName="debit" id="debit">
+      <div *ngIf="infoForm.get('debit').invalid && infoForm.get('debit').touched" class="invalid-feedback">
+        Veuillez saisir le débit.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="volume">Volume</label>
+      <input type="number" class="form-control" formControlName="volume" id="volume">
+      <div *ngIf="infoForm.get('volume').invalid && infoForm.get('volume').touched" class="invalid-feedback">
+        Veuillez saisir le volume.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="ph">PH</label>
+      <input type="text" class="form-control" formControlName="ph" id="ph">
+      <div *ngIf="infoForm.get('ph').invalid && infoForm.get('ph').touched" class="invalid-feedback">
+        Veuillez saisir le PH.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="type">Type</label>
+      <select class="form-control" formControlName="type" id="type">
+        
+        <option *ngFor="let type of types" [value]="type.id">{{ type.typeName }}</option>
+      </select>
+      <div *ngIf="infoForm.get('type').invalid && infoForm.get('type').touched" class="invalid-feedback" style="user-select: none;">
+        Veuillez sélectionner un type.
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="categorie">Catégorie</label>
+      <select class="form-control" formControlName="categorie" id="categorie">
+        <option value="domestique">Domestique</option>
+        <option value="industrielle">Industrielle</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+  </form>
+</div>

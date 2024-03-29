@@ -1,0 +1,54 @@
+<div class="container mt-4">
+  <h1>Tableau de bord des informations sur les eaux usées</h1>
+
+  <h2>Informations Domestiques</h2>
+  <div *ngIf="domesticInfos.length > 0; else noDomesticInfo">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Débit</th>
+          <th scope="col">Volume</th>
+          <th scope="col">PH</th>
+          <th scope="col">Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let info of domesticInfos">
+          <td>{{ info.debit }}</td>
+          <td>{{ info.volume }}</td>
+          <td>{{ info.ph }}</td>
+          <td>{{info.categorie}}</td>
+          <td>{{ info.type }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #noDomesticInfo>
+    <p>Aucune information domestique disponible.</p>
+  </ng-template>
+
+  <h2>Informations Industrielles</h2>
+  <div *ngIf="industrialInfos.length > 0; else noIndustrialInfo">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Débit</th>
+          <th scope="col">Volume</th>
+          <th scope="col">PH</th>
+          <th scope="col">Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let info of industrialInfos">
+          <td>{{ info.debit }}</td>
+          <td>{{ info.volume }}</td>
+          <td>{{ info.ph }}</td>
+          <td>{{ info.type }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ng-template #noIndustrialInfo>
+    <p>Aucune information industrielle disponible.</p>
+  </ng-template>
+</div>
