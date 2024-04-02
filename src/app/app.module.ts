@@ -41,6 +41,7 @@ import { PopupComponent } from './popup/popup.component';
 import { InfoListComponent } from './components/info-list/info-list.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { EditInfoDialogComponent } from './components/edit-info-dialog/edit-info-dialog.component';
+import { NgApexchartsModule } from "ng-apexcharts";
 @NgModule({
   declarations: [
     AppComponent,

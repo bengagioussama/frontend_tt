@@ -6,6 +6,6 @@ export interface Info {
     volume: number;
     ph: string;
     categorie: string;
-    type: Type;
+    typeId: number;
   }
 

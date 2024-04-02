@@ -33,15 +33,13 @@ export class InfoListComponent implements OnInit {
   openEditDialog(info: Info): void {
     const dialogRef = this.dialog.open(EditInfoDialogComponent, {
       width: '400px',
-      data: info // Pass the info object as data to the dialog
+      data: info 
     });
 
     dialogRef.afterClosed().subscribe(updatedInfo => {
       if (updatedInfo) {
-        // Call the service to update the info with the updatedInfo object
         this.infoService.updateInfo(updatedInfo.id, updatedInfo).subscribe(
           updated => {
-            // Handle successful update, if needed
             console.log('Info updated:', updated);
           },
           error => {
@@ -59,7 +57,6 @@ export class InfoListComponent implements OnInit {
       if (result) {
         this.infoService.deleteInfo(id).subscribe(
           () => {
-            // Remove the deleted Info from the list
             this.infos = this.infos.filter(info => info.id !== id);
             console.log('Info deleted');
           },

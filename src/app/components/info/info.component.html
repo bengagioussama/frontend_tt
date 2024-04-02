@@ -25,7 +25,6 @@
     <div class="form-group">
       <label for="type">Type</label>
       <select class="form-control" formControlName="type" id="type">
-        
         <option *ngFor="let type of types" [value]="type.id">{{ type.typeName }}</option>
       </select>
       <div *ngIf="infoForm.get('type').invalid && infoForm.get('type').touched" class="invalid-feedback" style="user-select: none;">

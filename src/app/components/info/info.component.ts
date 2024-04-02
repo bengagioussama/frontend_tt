@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Info } from 'src/app/info';
 import { InfoService } from 'src/app/service/info.service';
 import { MatDialog } from '@angular/material/dialog';
-import { PopupComponent } from 'src/app/popup/popup.component'; 
-import { Type }  from 'src/app/type';// Import the Type interface
-import { TypeService } from 'src/app/service/type.service'; // Import the TypeService
+import { PopupComponent } from 'src/app/popup/popup.component';
+import { Type } from 'src/app/type';
+import { TypeService } from 'src/app/service/type.service';
 
 @Component({
   selector: 'app-info',
@@ -14,17 +14,18 @@ import { TypeService } from 'src/app/service/type.service'; // Import the TypeSe
 })
 export class InfoComponent implements OnInit {
   infoForm: FormGroup;
+  types: Type[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private infoService: InfoService,
     private dialog: MatDialog,
     private typeService: TypeService
-  ) { }
+  ) {}
 
-  types: Type[] = [];
   ngOnInit(): void {
     this.createForm();
+    this.fetchTypes();
   }
 
   createForm(): void {
@@ -32,14 +33,26 @@ export class InfoComponent implements OnInit {
       debit: ['', Validators.required],
       volume: ['', Validators.required],
       ph: ['', Validators.required],
-      type: ['', Validators.required],
-      categorie:['', Validators.required]
+      type: [null, Validators.required],
+      categorie: ['', Validators.required]
     });
   }
 
   onSubmit(): void {
     if (this.infoForm.valid) {
-      const info: Info = this.infoForm.value;
+      const formValue = this.infoForm.value;
+     
+
+      const info: Info = {
+        id: null,
+        debit: formValue.debit,
+        volume: formValue.volume,
+        ph: formValue.ph,
+        typeId: formValue.typeId,
+        categorie: formValue.categorie
+      };
+
+      console.log('Form Data:', info);
       this.infoService.addInfo(info).subscribe(
         response => {
           console.log('Information ajoutée avec succès:', response);
@@ -61,16 +74,18 @@ export class InfoComponent implements OnInit {
   openPopup(): void {
     const dialogRef = this.dialog.open(PopupComponent, {
       width: '250px',
-      data: { message: 'Information ajoutée avec succès!' } // Pass data object with message property
+      data: { message: 'Information ajoutée avec succès!' }
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
   }
+
   fetchTypes(): void {
     this.typeService.getAllTypes().subscribe(
       (types: Type[]) => {
+        console.log(types);
         this.types = types;
       },
       (error) => {
@@ -78,5 +93,4 @@ export class InfoComponent implements OnInit {
       }
     );
   }
-  
 }

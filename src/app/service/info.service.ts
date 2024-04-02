@@ -10,12 +10,11 @@ import { JwtService } from './jwt.service'; // Import JwtService
 export class InfoService {
   private baseApiUrl = 'http://localhost:8082/api/infos'; 
   private apiUrl = 'http://localhost:8082/api/addInfo'; 
-  private apiGetAllUrl = 'http://localhost:8082/api/getAll'; // URL de votre API pour l'ajout d'informations sur les eaux usées
-  private infoAddedSubject = new Subject<void>(); // Subject for emitting event
+  private apiGetAllUrl = 'http://localhost:8082/api/getAll'; 
+  private infoAddedSubject = new Subject<void>(); 
 
-  constructor(private http: HttpClient, private jwtService: JwtService) { } // Inject JwtService
+  constructor(private http: HttpClient, private jwtService: JwtService) { } 
 
-  // Méthode pour ajouter une nouvelle information sur les eaux usées
   addInfo(info: Info): Observable<Info> {
     return this.http.post<Info>(this.apiUrl, info, { headers: this.jwtService.createAuthorizationHeader() }) // Include JWT token in the headers
       .pipe(

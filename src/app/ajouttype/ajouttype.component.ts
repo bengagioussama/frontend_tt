@@ -31,23 +31,19 @@ export class AjoutTypeComponent implements OnInit {
     });
   }
 
-  // Méthode pour récupérer tous les types depuis le service
   getTypes(): void {
     this.typeService.getAllTypes()
       .subscribe(types => this.types = types);
   }
 
-  // Méthode pour sélectionner un type
   onSelect(type: Type): void {
     this.selectedType = type;
   }
 
-  // Méthode pour ajouter un type
   add(): void {
     if (this.typeForm.invalid) {
-      return; // Sortie si le formulaire est invalide
+      return; 
     }
-    // Création d'un nouvel objet Type à partir des valeurs du formulaire
     const newType: Type = this.typeForm.value as Type;
     this.typeService.createType(newType)
       .subscribe(type => {
@@ -56,7 +52,6 @@ export class AjoutTypeComponent implements OnInit {
       });
   }
 
-  // Méthode pour supprimer un type
   delete(type: Type): void {
     this.types = this.types.filter(t => t !== type);
     this.typeService.deleteType(type.id).subscribe();
